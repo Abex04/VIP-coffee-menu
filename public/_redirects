@@ -1,0 +1,5 @@
+# SPA fallback
+/*    /index.html   200
+
+# Example: force https (Netlify usually handles automatically)
+# http://yourdomain.com/* https://yourdomain.com/:splat 301!

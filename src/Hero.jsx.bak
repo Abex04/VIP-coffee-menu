@@ -1,0 +1,51 @@
+import React from "react";
+
+const HERO_IMAGE =
+  "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=1600&q=80";
+
+const Hero = () => {
+  return (
+    <section className="w-full">
+      <div className="relative h-[420px] md:h-[520px]">
+        <img
+          src={HERO_IMAGE}
+          alt="coffee hero"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+
+        {/* stronger gradient overlay: darker at bottom to improve text contrast */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.55) 60%)",
+          }}
+        />
+
+        <div className="absolute inset-0">
+          <div className="absolute left-0 right-0 bottom-6 md:bottom-8">
+            <div className="section-container px-6">
+              <div className="max-w-lg mx-auto text-center text-white">
+                <h1 className="text-3xl md:text-5xl font-bold mb-4 hero-text text-shadow-sm">
+                  We serve the richest coffee in the city!
+                </h1>
+                <p className="mb-6 text-sm md:text-base hero-text text-shadow-sm">
+                  Discover our special blends and pastries made fresh every day.
+                </p>
+                <div className="flex gap-4 justify-center">
+                  <button className="px-5 py-2 bg-white/20 text-white rounded-full font-medium backdrop-blur-sm focus-ring touch-target">
+                    Explore Menu
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Icon strip removed to keep hero image clean (wooden surface and coffee cups remain) */}
+    </section>
+  );
+};
+
+export default Hero;

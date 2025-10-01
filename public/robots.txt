@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Add disallow rules here if you introduce private paths
+# Disallow: /admin
+
+Sitemap: https://vipcoffee.netlify.app/sitemap.xml

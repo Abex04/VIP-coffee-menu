@@ -1,0 +1,277 @@
+/* Google Fonts import removed: fonts now loaded via <link> tags in index.html for better performance */
+
+/* Ensure footer social icons are always visible and stack vertically on mobile */
+.footer-social {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: center;
+}
+@media (max-width: 640px) {
+  .footer-social {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+/* Tailwind v4 usage: preflight + utilities */
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+
+:root{
+  /* Color system */
+  --color-bg: #f5f1ea; /* cream */
+  --color-surface: #fff;
+  --color-text: #3e2723; /* brown-dark */
+  --color-muted: #6f4e37; /* brown-mid */
+  --color-accent: #a67c52; /* warm accent */
+  --color-border: rgba(110,84,67,0.08);
+
+  /* Type scale (mobile-first) */
+  --type-xs: 12px;
+  --type-sm: 14px;
+  --type-base: 16px;
+  --type-lg: 18px;
+  --type-xl: 22px;
+  --type-hero: 32px;
+
+  /* Spacing tokens */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+
+  /* Elevation */
+  --shadow-sm: 0 6px 18px rgba(51, 38, 33, 0.06);
+
+  /* Animation timing */
+  --motion-fast: 160ms;
+  --motion-medium: 360ms;
+
+  /* Footer tokens */
+  --footer-bg-base: #0f0f0f;
+  --footer-bg-alt: #0b0b0b;
+  --footer-radial: rgba(139,87,42,0.18);
+  --footer-accent-start:#e9c08d;
+  --footer-accent-end:#ffdf9f;
+  --footer-border:#272727;
+  --footer-social-bg-start:#1c1c1c;
+  --footer-social-bg-end:#151515;
+  --footer-social-hover-start:#ffcf70;
+  --footer-social-hover-end:#c07b34;
+  --footer-focus-ring: rgba(255,214,140,0.55);
+  /* Easing & additional spacing */
+  --ease-standard: cubic-bezier(.2,.8,.2,1);
+  --space-6: 32px;
+
+  /* Footer gradient tokens */
+  --footer-line-gradient: linear-gradient(90deg,transparent,rgba(255,214,140,0.35),transparent);
+  --footer-accent-gradient: linear-gradient(90deg,var(--footer-accent-start),var(--footer-accent-end));
+
+  /* Dark theme scaffold (activated via [data-theme="auto"] + prefers-color-scheme) */
+  --color-bg-dark:#0f0f0f;
+  --color-surface-dark:#1c1c1c;
+  --color-text-dark:#f5f5f5;
+  --color-muted-dark:#bfa692;
+  --color-border-dark:rgba(255,255,255,0.09);
+}
+
+@media (prefers-color-scheme: dark){
+  :root[data-theme="auto"]{
+    --color-bg: var(--color-bg-dark);
+    --color-surface: var(--color-surface-dark);
+    --color-text: var(--color-text-dark);
+    --color-muted: var(--color-muted-dark);
+    --color-border: var(--color-border-dark);
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  :root { --motion-medium: 1ms; --motion-fast: 1ms; }
+  * { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+}
+
+body{
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: var(--type-base);
+  line-height: 1.4;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Performance utility: avoid rendering below-fold content until scrolled near */
+.cv-auto { content-visibility: auto; contain-intrinsic-size: 800px; }
+
+/* Service worker update toast */
+.sw-toast { position:fixed; left:50%; bottom:24px; transform:translate(-50%, 30px); background:#2a1a00; color:#fff; padding:12px 18px; border-radius:40px; display:flex; gap:14px; align-items:center; font-size:14px; box-shadow:0 8px 24px -6px rgba(0,0,0,0.35); opacity:0; transition:all 420ms var(--ease-standard); z-index:9999; }
+.sw-toast button { background:#a67c52; border:none; color:#fff; font-weight:600; padding:8px 14px; border-radius:24px; cursor:pointer; font-size:13px; letter-spacing:.5px; }
+.sw-toast button:hover { background:#b5875b; }
+.sw-toast.visible { opacity:1; transform:translate(-50%, 0); }
+
+/* Use a clean sans-serif for UI headings for clarity on small screens */
+h1,h2,h3{
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  color: var(--color-text);
+}
+
+/* Subtle text shadow utility to improve legibility on images */
+.text-shadow-sm{ text-shadow: 0 2px 6px rgba(0,0,0,0.35); }
+
+/* Hero-specific helper to increase contrast and add a subtle shadow */
+.hero-text{ color: #ffffff; text-shadow: 0 6px 18px rgba(0,0,0,0.6); }
+
+/* Small helper to center content strips */
+.section-container{
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width:100% !important;
+}
+
+/* Card subtle border */
+.card-border{
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+/* Hide horizontal scrollbar but keep scroll behavior */
+.no-scrollbar::-webkit-scrollbar{display:none}
+.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+
+@media (max-width:640px){
+  .section-container{padding-left:16px;padding-right:16px}
+}
+
+/* Card entrance animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px) scale(0.995); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 420ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+/* Slight elevation on image hover */
+.product-image-hover:hover img {
+  transform: scale(1.03);
+  transition: transform var(--motion-medium) var(--ease-standard);
+}
+
+/* Price badge helper (used on product cards) */
+.price-badge{
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  background: rgba(255,255,255,0.9);
+  color: var(--color-text);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: var(--type-sm);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(6px);
+}
+
+/* Focus styles for interactive controls */
+.focus-ring:focus{
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Make interactive elements easier to tap */
+.touch-target{padding: 10px; min-height:44px; display:inline-flex; align-items:center; justify-content:center}
+
+/* Responsive adjustments: tablet (md) and desktop (lg) */
+@media (min-width: 768px) {
+  :root{
+    --type-base: 18px;
+    --type-lg: 20px;
+    --type-xl: 26px;
+    --type-hero: 40px;
+    --space-4: 20px;
+  }
+
+  body{ font-size: var(--type-base); }
+
+  .section-container{max-width:none !important;padding:0 !important;}
+
+  h1{ font-size: var(--type-hero); }
+  h2{ font-size: var(--type-xl); }
+
+  /* slightly stronger hover scale on larger screens */
+  .product-image-hover:hover img { transform: scale(1.04); }
+
+  /* slightly larger price badge on tablets */
+  .price-badge{ font-size: 0.95rem; padding: 8px 12px; }
+}
+
+@media (min-width: 1024px) {
+  :root{
+    --type-base: 18px;
+    --type-lg: 20px;
+    --type-xl: 28px;
+    --type-hero: 48px;
+  }
+
+  .section-container{max-width:none !important;padding:0 !important;}
+
+  /* increase card presence on desktop */
+  .card-border{ box-shadow: 0 10px 30px rgba(51,38,33,0.08); }
+
+  /* stronger hover zoom for product images on desktop */
+  .product-image-hover:hover img { transform: scale(1.07); }
+
+  /* increase hero min-height for large screens (components still can override) */
+  .hero-giant{ min-height: 620px; }
+}
+
+/* Footer utility classes */
+.footer-root{ background:
+  radial-gradient(circle at 30% 20%, var(--footer-radial), transparent 60%),
+  linear-gradient(180deg,var(--footer-bg-base) 0%, var(--footer-bg-alt) 100%);
+  color:#e6e6e6;
+  border-top:1px solid var(--footer-border);
+}
+.footer-root::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--footer-line-gradient);pointer-events:none;}
+.footer-overlay{ background:linear-gradient(90deg, rgba(255,220,160,0.04) 0%, rgba(255,255,255,0) 60%); }
+.footer-divider{ background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,214,140,0.35), rgba(255,255,255,0)); height:1px; width:100%; }
+.footer-brand-gradient{ background:var(--footer-accent-gradient); -webkit-background-clip:text; color:transparent; }
+.social-btn{ display:flex; align-items:center; justify-content:center; width:46px; height:46px; border-radius:999px; background:linear-gradient(145deg,var(--footer-social-bg-start),var(--footer-social-bg-end)); border:1px solid var(--footer-border); color:#fafafa; transition:background var(--motion-medium) var(--ease-standard), transform var(--motion-medium) var(--ease-standard), color var(--motion-medium) var(--ease-standard), box-shadow var(--motion-medium) var(--ease-standard); position:relative; overflow:hidden; }
+.social-btn::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,214,140,0.25),transparent 70%);opacity:0;transition:opacity var(--motion-medium) var(--ease-standard);} 
+.social-btn:hover{ background:linear-gradient(145deg,var(--footer-social-hover-start),var(--footer-social-hover-end)); color:#2a1a00; box-shadow:0 0 0 3px rgba(255,214,140,0.15),0 4px 18px -2px rgba(255,190,90,0.35); }
+.social-btn:hover::after{opacity:1;}
+.social-btn:focus-visible{ outline:2px solid var(--footer-focus-ring); outline-offset:3px; }
+.back-to-top-btn{ background:rgba(255,214,140,0.08); border:1px solid rgba(255,214,140,0.25); border-radius:6px; }
+.back-to-top-btn:hover{ background:linear-gradient(90deg,var(--footer-accent-start),var(--footer-accent-end)); color:#2a1a00; }
+.back-to-top-hidden{ opacity:0; pointer-events:none; transform:translateY(6px); transition:opacity var(--motion-medium) var(--ease-standard), transform var(--motion-medium) var(--ease-standard); }
+.back-to-top-visible{ opacity:1; pointer-events:auto; transform:translateY(0); }
+
+@media (max-width:360px){
+  .back-to-top-btn .label{display:none}
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-btn, .back-to-top-btn { transition:none !important; }
+  .back-to-top-hidden{ transform:none; }
+}
+
+/* Product aspect ratio container to prevent layout shift */
+.product-media{ aspect-ratio:4/5; position:relative; overflow:hidden; background:#f2eee8; }
+.product-media img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+@media (prefers-reduced-motion: reduce){
+  .product-image-hover:hover img{ transform:none !important; }
+}
+

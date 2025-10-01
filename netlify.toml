@@ -1,0 +1,26 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# (Optional) environment overrides
+#[build.environment]
+#  NODE_VERSION = "20"
+
+# Reinforce headers (Netlify also reads /public/_headers). Useful if moving files later.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' https://images.unsplash.com https://images.pexels.com data: blob:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+  # Added plus.unsplash.com to cover premium Unsplash image host
+  Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' https://images.unsplash.com https://plus.unsplash.com https://images.pexels.com data: blob:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+
+# Custom redirect examples (already handled in /public/_redirects)
+#[[redirects]]
+#  from = "http://yourdomain.com/*"
+#  to = "https://yourdomain.com/:splat"
+#  status = 301
+#  force = true
